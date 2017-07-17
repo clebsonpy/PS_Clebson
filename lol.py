@@ -15,15 +15,15 @@ def cadastro(dadosUsuario):
 def entradaDadosUsuario(atividade, usuarios=None, recursos=None):
 	if atividade == 1:
 		usuario = input("Usuário: ")
+		while usuario in usuarios:
+			print('Usuário Invalido!')
+			usuario = input("Usuário: ")
 		email = input("E-mail: ")
 		nome = input("Nome: ")
 		funcao = input("Função: ")
 		dadosUsuario = (usuario, email, nome, funcao)
-		for usua in usuarios:
-			if usuario == usua:
-				print('Usuário Invalido!')
-				usuario = input("Usuário: ")
 		usuarios[usuario] = cadastro(dadosUsuario=dadosUsuario)
+		return usuarios
 
 	elif atividade == 2:
 		identificacao = input("Identificação: ")
