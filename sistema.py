@@ -3,6 +3,11 @@ import datetime
 def data_hora():
 	data_hora_inicio = datetime.datetime.strptime(input('Data e Hora(AAAA/MM/DD hh:mm): '), '%d/%m/%Y %H:%M')
 	data_hora_fim = datetime.datetime.strptime(input('Data e Hora(AAAA/MM/DD hh:mm): '), '%d/%m/%Y %H:%M')
+	print(datetime.datetime.now())
+	while datetime.datetime.now() > data_hora_inicio > data_hora_fim:
+		print('Data e Hora Invalida!')
+		data_hora_inicio = datetime.datetime.strptime(input('Data e Hora(AAAA/MM/DD hh:mm): '), '%d/%m/%Y %H:%M')
+		data_hora_inicio = datetime.datetime.strptime(input('Data e Hora(AAAA/MM/DD hh:mm): '), '%d/%m/%Y %H:%M')
 	return data_hora_inicio, data_hora_fim
 
 def cadastro(dadosUsuario):
@@ -13,7 +18,8 @@ def cadastro(dadosUsuario):
 	return dicUsuario
 
 def cadastroRecurso(dadosRecurso):
-	
+	dicRecurso = {'responsavel': dadosRecurso[0]
+				}
 
 def printMenu(dicFuncoes, tipo = ''):
 	print('%s: ' % tipo)
@@ -57,11 +63,12 @@ def alocacaoRecurso(recursos, usuarios):
 					3: 'Auditório',
 					4: 'Projetores'}
 
-	usuario = input("Usuário Responsável")
+	usuario = input("Usuário Responsável: ")
 	while not usuario in usuarios:
 		print('Usuário não existe!')
-		usuario = input("Usuário Responsável")
-	if usuarios[usuario]['funcao'].split("")[0] == 'Aluno':
+		usuario = input("Usuário Responsável: ")
+	print(usuarios[usuario]['funcao'].split(" ")[0])
+	if usuarios[usuario]['funcao'].split(" ")[0] == 'Aluno':
 		print('Usuário não pode alocar recursos!')
 		return recursos
 
@@ -71,12 +78,14 @@ def alocacaoRecurso(recursos, usuarios):
 		print('Digite o Código de Identificação!')
 		identificacao = input("Código de Identificação: ")
 	data = data_hora()
-
-	return identificacao, data[0], data[1]
+	dadosRecurso = (identificacao, usuario, recurso, data[0], data[1])
+	recursos[identificacao] = cadastroRecurso(dadosRecurso)
+	return recursos
 
 def menu():
 	opcoes = {1: 'Cadastro de Usuário',
 			2: 'Alocação de Recursos',
+			3: '',
 			9: 'Sair'}
 	opcao = printMenu(opcoes, tipo = 'Deseja realizar: ')
 	return opcao
@@ -96,6 +105,6 @@ if __name__ == '__main__':
 		if opcao == 1:
 			usuarios = entradaDadosUsuario(usuarios)
 		elif opcao == 2:
-			recursos = entradaDadosRecurso(recursos)
+			recursos = alocacaoRecurso(recursos, usuarios)
 		opcao = menu()
 	print(usuarios)
