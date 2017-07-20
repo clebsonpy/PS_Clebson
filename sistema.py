@@ -1,14 +1,22 @@
 import datetime
+import pytz
 
 def data_hora():
-	data_hora_inicio = datetime.datetime.strptime(input('Data e Hora(AAAA/MM/DD hh:mm): '), '%d/%m/%Y %H:%M')
-	data_hora_fim = datetime.datetime.strptime(input('Data e Hora(AAAA/MM/DD hh:mm): '), '%d/%m/%Y %H:%M')
-	print(datetime.datetime.now())
-	while datetime.datetime.now() > data_hora_inicio > data_hora_fim:
-		print('Data e Hora Invalida!')
-		data_hora_inicio = datetime.datetime.strptime(input('Data e Hora(AAAA/MM/DD hh:mm): '), '%d/%m/%Y %H:%M')
-		data_hora_inicio = datetime.datetime.strptime(input('Data e Hora(AAAA/MM/DD hh:mm): '), '%d/%m/%Y %H:%M')
-	return data_hora_inicio, data_hora_fim
+    print('Formato de entrada: (DD/MM/AAAA hh:mm)')
+    tz = pytz.timezone('America/Maceio')
+    print(datetime.datetime.now(tz=tz))
+    data_hora_inicio = datetime.datetime.strptime(input('Data e Hora - Inicio: ')+' -0300', '%d/%m/%Y %H:%M %z')
+    print(data_hora_inicio)
+    while data_hora_inicio == "" or data_hora_inicio < datetime.datetime.now(tz=tz):
+        print('Data e Hora inicio invalida!')
+        data_hora_inicio = datetime.datetime.strptime(input('Data e Hora - Inicio: ')+' -0300', '%d/%m/%Y %H:%M %z')
+
+    data_hora_fim = datetime.datetime.strptime(input('Data e Hora - Fim: ')+' -0300', '%d/%m/%Y %H:%M %z')
+    while data_hora_fim == "" or data_hora_fim < data_hora_inicio:
+        print('Data e Hora fim invalida!')
+        data_hora_fim = datetime.datetime.strptime(input('Data e Hora - Fim: ')+' -0300', '%d/%m/%Y %H:%M %z')
+
+    return data_hora_inicio, data_hora_fim
 
 def cadastro(dadosUsuario):
 	dicUsuario = {'usuario': dadosUsuario[0],
@@ -18,8 +26,12 @@ def cadastro(dadosUsuario):
 	return dicUsuario
 
 def cadastroRecurso(dadosRecurso):
-	dicRecurso = {'responsavel': dadosRecurso[0]
-				}
+	dicRecurso = {'responsavel': dadosRecurso[0],
+	                'identificacao': dadosRecurso[1],
+	                'tipoRecurso': dadosRecurso[2],
+	                'dataInicio': dadosRecurso[3],
+	                'dataFim': dadosRecurso[4]}
+	return dicRecurso
 
 def printMenu(dicFuncoes, tipo = ''):
 	print('%s: ' % tipo)
@@ -78,8 +90,8 @@ def alocacaoRecurso(recursos, usuarios):
 		print('Digite o Código de Identificação!')
 		identificacao = input("Código de Identificação: ")
 	data = data_hora()
-	dadosRecurso = (identificacao, usuario, recurso, data[0], data[1])
-	recursos[identificacao] = cadastroRecurso(dadosRecurso)
+	dadosRecurso = (usuario, identificacao, recurso, data[0], data[1])
+	recursos[(recurso, identificacao)] = cadastroRecurso(dadosRecurso)
 	return recursos
 
 def menu():
@@ -108,3 +120,4 @@ if __name__ == '__main__':
 			recursos = alocacaoRecurso(recursos, usuarios)
 		opcao = menu()
 	print(usuarios)
+	print(recursos)
