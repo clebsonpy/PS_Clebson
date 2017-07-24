@@ -102,6 +102,11 @@ def alterarStatusRecurso(dicRecursos, dicUsuarios, usuario):
             return dicRecursos
 
     elif status == 2 and dicRecursos[chaveRecurso]['status'] == 'Alocado':
+        for rec in dicRecursos:
+            if dicRecursos[rec]['status'] == 'Em Andamento' and dicRecursos[rec]['responsavel'] == usuario:
+                print('Usuário contém recurso em andamento!')
+                return dicRecursos
+
         if dicUsuarios[usuario]['funcao'] == 'Administrador' or dicUsuarios[usuario]['usuario'] == usuario:
             dicRecursos[chaveRecurso]['atividade'] = atividade(dicUsuarios, dicRecursos[chaveRecurso])
             dicRecursos[chaveRecurso]['status'] = dicStatus[status]
