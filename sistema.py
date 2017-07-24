@@ -1,6 +1,5 @@
 import datetime
 import pytz
-from matplotlib.mlab import rec2csv
 
 
 def data_hora():
