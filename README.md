@@ -8,7 +8,7 @@ Assunto do e-mail: [projeto] sistema de gestao
 Atividade
 
 A partir da visão geral do sistema apresentada abaixo, utilize a linguagem de
-programação Java para implementar os requisitos funcionais.
+programação Python para implementar os requisitos funcionais.
 
 Visão Geral do Sistema
 
