@@ -1,14 +1,11 @@
 from abc import ABCMeta, abstractmethod
-from usuarios import Professor(), Adminstardor(), Pesquisador()
 
-class RecurseState():
+class RecurseState(object):
     name = "state"
-    stateActual = None
-    responses = []
+    allowed = []
 
-    @abstractmethod
-    def status(self, state, response):
-        if response in self.responses:
+    def switch(self, state):
+        if state.name in self.allowed:
             print("Status Alterado")
             self.__class__ = state
         else:
@@ -16,5 +13,16 @@ class RecurseState():
 
 class EmProcessoAlocacao(RecurseState):
     name = "Em processo de alocação"
-    stateActual = None
-    response = [Professor(), Adminstardor(), Pesquisador()]
+    allowed = ["Alocado"]
+
+class Alocado(RecurseState):
+    name = "Alocado"
+    allowed = ["Em andamento"]
+
+class EmAndamento(RecurseState):
+    name = "Em andamento"
+    allowed = ["Concluído"]
+
+class Concluido(RecurseState):
+    name = "Concluído"
+    allowed = ["Em processo de alocação"]
