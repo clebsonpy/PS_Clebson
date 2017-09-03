@@ -6,25 +6,31 @@ class Resources(metaclass = ABCMeta):
         pass
 
     @abstractmethod
-    def change(self, state):
+    @property
+    def state(self):
         pass
 
     @abstractmethod
-    def getState(self):
-        pass
-
-    @abstractmethod
-    def setStart_date(self, start_date):
-        pass
-    
-    @abstractmethod
-    def setEnd_date(self, end_date):
-        pass
-
-    @abstractmethod
-    def getStart_date(self):
+    @property
+    def start_date(self):
        pass
 
     @abstractmethod
-    def getEnd_date(self):
+    @property
+    def end_date(self):
+        pass
+
+    @abstractmethod
+    @state.setter
+    def state(self, state):
+        pass
+
+    @abstractmethod
+    @start_date.setter
+    def start_date(self, start_date):
+        pass
+    
+    @abstractmethod
+    @end_date.setter
+    def end_date(self, end_date):
         pass

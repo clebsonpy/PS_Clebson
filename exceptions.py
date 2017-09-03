@@ -10,3 +10,11 @@ class DateInvalid(Error):
 class DateStartNone(Error):
     def __init__(self, message):
         super().__init__(message)
+
+class ResourceAlocate(Error):
+    def __init__(self, message):
+        super().__init__(message)
+
+class ResourceChangeState(Error):
+    def __init__(self, message):
+        super().__init__(message)

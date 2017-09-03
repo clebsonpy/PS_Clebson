@@ -4,26 +4,31 @@ from date import DateHour
 
 class Auditorium(Resources):
 
-    def __init__(self, identificated, response):
+    def __init__(self, identificated):
         self.identificated = identificated
         self.__date_hour = DateHour()
-        self.response = response
+        self.__response = None
         self.__state = EmProcessoAlocacao()
     
-    def change(self, state):
+    @property
+    def state(self):
+        return self.__state.name
+    
+    @property
+    def start_date(self):
+        return self.__date_hour.getStart_date()
+    @property
+    def end_date(self):
+        return self.__date_hour.getEnd_date()
+        
+    @state.setter
+    def state(self, state):
         self.__state.switch(state)
     
-    def getState(self):
-        return self.__state.name
-
-    def setStart_date(self, start_date):
+    @start_date.setter
+    def start_date(self, start_date):
        self.__date_hour.setStart_date(start_date)
     
-    def setEnd_date(self, end_date):
+    @end_date.setter
+    def end_date(self, end_date):
         self.__date_hour.setEnd_date(end_date)
-
-    def getStart_date(self):
-       return self.__date_hour.getStart_date()
-    
-    def getEnd_date(self):
-        return self.__date_hour.getEnd_date()
