@@ -1,0 +1,18 @@
+from user import User
+from exceptions import ResourceAlocate, ResourceChangeState
+
+class Teacher(User):
+    __resource = {}
+
+    def __init__(self, name, email):
+        super().__init__(name, email)
+
+    
+    def allocateResource(self, Resource):
+        self.__resource[Resource.identificated] = Resource
+
+    def changeStateResource(self, identificated):
+        pass
+
+    def __repr__(self):
+        pass
