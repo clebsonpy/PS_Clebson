@@ -3,18 +3,23 @@ class Error(Exception):
         super().__init__(message)
         self.message = message
 
-class DateInvalid(Error):
-    def __init__(self, message):
-        super().__init__(message)
+class DateInvalidError(Error):
+    pass
 
-class DateStartNone(Error):
-    def __init__(self, message):
-        super().__init__(message)
+class DateStartNoneError(Error):
+    pass
 
-class ResourceAlocate(Error):
-    def __init__(self, message):
-        super().__init__(message)
+class ResourceAlocateError(Error):
+    pass
 
-class ResourceChangeState(Error):
-    def __init__(self, message):
-        super().__init__(message)
+class ResourceChangeStateError(Error):
+    pass
+
+class PermissionError(Error):
+    pass
+
+class UsernameNotExist(Error):
+    pass
+
+class ResourceNotExist(Error):
+    pass

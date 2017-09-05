@@ -1,28 +1,34 @@
 from abc import ABCMeta, abstractmethod
+from exceptions import ResourceChangeStateError
+from permission import PermissionResource
 
-class RecurseState(object):
+class ResourceState(object):
     name = "state"
     allowed = []
 
     def switch(self, state):
         if state.name in self.allowed:
-            print("Status Alterado")
+            print("Status changed")
             self.__class__ = state
         else:
-            print("Status não pode ser alterado")
+            raise ResourceChangeStateError("Status can not be changed")
 
-class EmProcessoAlocacao(RecurseState):
-    name = "Em processo de alocação"
-    allowed = ["Alocado"]
+class InProcessAllocation(ResourceState):
+    name = "In Process Allocation"
+    allowed = ["Allocated"]
+    permission = PermissionResource().changeState()
 
-class Alocado(RecurseState):
-    name = "Alocado"
-    allowed = ["Em andamento"]
+class Allocated(ResourceState):
+    name = "Allocated"
+    allowed = ["In progress"]
+    permission = PermissionResource().changeState()
 
-class EmAndamento(RecurseState):
-    name = "Em andamento"
-    allowed = ["Concluído"]
+class InProgress(ResourceState):
+    name = "In progress"
+    allowed = ["Completed"]
+    permission = PermissionResource().changeState()
 
-class Concluido(RecurseState):
-    name = "Concluído"
-    allowed = ["Em processo de alocação"]
+class Completed(ResourceState):
+    name = "Completed"
+    allowed = ["In Process Allocation"]
+    permission = PermissionResource().changeState()

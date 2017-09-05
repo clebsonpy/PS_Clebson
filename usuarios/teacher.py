@@ -1,18 +1,22 @@
-from user import User
-from exceptions import ResourceAlocate, ResourceChangeState
+from usuarios.user import User
+from exceptions import ResourceAlocateError, ResourceChangeStateError
+from record import Record
 
 class Teacher(User):
-    __resource = {}
 
-    def __init__(self, name, email):
-        super().__init__(name, email)
+    def __init__(self, username, name):
+        super().__init__(username, name)
 
+    def allocateResource(self, Resource, identificated):
+        resource = Resource(identificated)
+        resource.response()
+        Record().__resource[identificated] = Resource(identificated)
     
-    def allocateResource(self, Resource):
-        self.__resource[Resource.identificated] = Resource
-
     def changeStateResource(self, identificated):
-        pass
+        if identificated in Record().__resource:
+            pass
+        else:
+            raise ResourceChangeStateError("Teacher not Resource")
 
     def __repr__(self):
         pass

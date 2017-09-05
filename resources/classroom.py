@@ -9,6 +9,7 @@ class Classroom(Resources):
         self.__date_hour = DateHour()
         self.__response = None
         self.__state = EmProcessoAlocacao()
+        self.__permission = []
     
     @property
     def state(self):

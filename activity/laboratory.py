@@ -7,6 +7,7 @@ class Laboratory(Activity):
         self.__description = None
         self.__participants = None
         self.__supportMaterial = None
+        self.__permission = []
 
     @property
     def description(self):

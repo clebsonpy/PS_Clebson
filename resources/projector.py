@@ -1,5 +1,5 @@
-from resource import Resources
-from state import EmProcessoAlocacao
+from resources.resource import Resources
+from state import InProcessAllocation
 from date import DateHour
 
 class Projector(Resources):
@@ -8,19 +8,28 @@ class Projector(Resources):
         self.identificated = identificated
         self.__date_hour = DateHour()
         self.__response = None
-        self.__state = EmProcessoAlocacao()
+        self.__state = InProcessAllocation()
     
     @property
     def state(self):
         return self.__state.name
     
     @property
+    def response(self):
+        return self.response
+
+    @property
     def start_date(self):
         return self.__date_hour.getStart_date()
+    
     @property
     def end_date(self):
         return self.__date_hour.getEnd_date()
-        
+
+    @response.setter
+    def response(self, response):
+        self.__response = response
+
     @state.setter
     def state(self, state):
         self.__state.switch(state)
