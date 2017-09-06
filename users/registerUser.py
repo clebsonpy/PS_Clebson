@@ -13,15 +13,18 @@ class RegisterUser(object):
         self.name = input("Nome: ")
         
     def save(self):
-        Record().setUser(self.menu()(self.username, self.name))
+        x = self.menu()
+        user = eval(x+'("%s", "%s")' % (self.username, self.name))
+        Record().setUser(user)
 
     def menu(self):
-        lista = [Teacher, Manager, Researcher, [Graduate, Master, Doctorate]]
+        lista = ['Teacher', 'Manager', 'Researcher', ['Graduate', 'Master', 'Doctorate']]
         print("1: {}\n2: {}\n3: {}\n4: {}".format('Professor', 'Administrador', 'Pesquisador', 'Aluno'))
         typeUser = -1 + int(input("Tipo de Usuário: "))
+        user = lista[typeUser]
         if typeUser == 3:
             print("1: {}\n2: {}\n3: {}".format('Graduação', 'Mestrado', 'Doutorado'))
             typeUser = -1 + int(input("Tipo de Usuário: "))
-            lista[3][typeUser]
-        return lista[typeUser]
+            user = lista[3][typeUser]
+        return user
     

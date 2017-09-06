@@ -1,4 +1,4 @@
-from usuarios.user import User
+from users.user import User
 from exceptions import ResourceAlocateError, ResourceChangeStateError
 from record import Record
 
@@ -17,6 +17,3 @@ class Teacher(User):
             pass
         else:
             raise ResourceChangeStateError("Teacher not Resource")
-
-    def __repr__(self):
-        pass

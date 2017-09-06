@@ -16,7 +16,4 @@ class User(metaclass = ABCMeta):
         return self.__name
 
     def setName(self, name):
-        self.name = name
-
-    def __repr__(self):
-        pass
+        self.__name = name
