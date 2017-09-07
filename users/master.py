@@ -1,4 +1,4 @@
-from usuarios.student import Student
+from users.student import Student
 
 class Master(Student):
 

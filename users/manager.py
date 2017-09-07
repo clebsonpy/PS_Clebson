@@ -1,4 +1,4 @@
-from usuarios.user import User
+from users.user import User
 
 class Manager(User):
 

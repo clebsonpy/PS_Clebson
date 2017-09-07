@@ -1,10 +1,8 @@
-from usuarios import registerUser
-from record import Record
+from system import System
 
 
 if __name__ == '__main__':
-    registerUser.RegisterUser().save()
-    user = Record().getUser("Clebsonpy")
-    print(user.getName())
-    
+    sys = System()
+    sys.register_user()
+    sys.consult_user()
 
