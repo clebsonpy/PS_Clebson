@@ -5,25 +5,37 @@ from users.master import Master
 from users.researcher import Researcher
 from users.teacher import Teacher
 
-class RegisterUser(object):
+class SystemUser(object):
     __instance = None
     
     def __new__(cls):
-        if not RegisterUser.__instance:
-            RegisterUser.__instance = super(RegisterUser, cls).__new__(cls)
+        if not SystemUser.__instance:
+            SystemUser.__instance = super(SystemUser, cls).__new__(cls)
         
-        return RegisterUser.__instance
+        return SystemUser.__instance
     
     def __init__(self):
-        self.username = input("Usuário: ")
-        self.name = input("Nome: ")
-        
-    def user(self):
-        x = self.menu()
+        print("1: {}\n2: {}\n3: {}".format('Register User', 'Edit User', 'Delete User'))
+        self.option = int(input("Enter the desired option: "))
+        if self.option == 1:
+            self.registerUser()
+        elif self.option == 2:
+            self.editUser()
+        elif self.option == 3:
+            self.deleteUser()
+
+    def registerUser(self):
+        x = self.menuRegisterUser()
         user = eval(x+'("%s", "%s")' % (self.username, self.name))
         return user
 
-    def menu(self):
+    def editUser(self):
+        pass
+    
+    def deleteUser(self):
+        pass
+
+    def menuRegisterUser(self):
         lista = ['Teacher', 'Manager', 'Researcher', ['Graduate', 'Master', 'Doctorate']]
         print("1: {}\n2: {}\n3: {}\n4: {}".format('Professor', 'Administrador', 'Pesquisador', 'Aluno'))
         typeUser = -1 + int(input("Tipo de Usuário: "))
@@ -33,3 +45,8 @@ class RegisterUser(object):
             typeUser = -1 + int(input("Tipo de Usuário: "))
             user = lista[3][typeUser]
         return user
+
+    def menuEditUser(self):
+        print("1: {}\n2: {}".format('Username', 'Name'))
+        self.option = int(input("Enter the desired option: "))
+        
